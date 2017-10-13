@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>demo</title>
+	<style>
+		.widget {
+			width: 300px;
+			height: 200px;
+			position: relative;
+			top: -50px;
+			left: 30%;
+			background: #eee;
+		}
+		.close {
+			width: 16px;
+			height: 16px;
+			line-height: 16px;
+			font-size: 16px;
+			color: red;
+			background: #aaa;
+			text-align: center;
+			position: absolute;
+			right: 0;
+		}
+	</style>
+</head>
+<body>
+	<div class="addGoods">
+		<ul>
+			<li>
+				<label for=""><input type="checkbox" name="fruit" price="24">苹果</label>
+			</li>
+			<li>
+				<label for=""><input type="checkbox" name="fruit" price="12">梨子</label>
+			</li>
+			<li>
+				<label for=""><input type="checkbox" name="fruit" price="34">西瓜</label>
+			</li>
+			<li>
+				<label for=""><input type="checkbox" name="fruit" price="21">香蕉</label>
+			</li>
+		</ul>
+	</div>
+	<button class="buy">结算</button>
+	<div class="widget" style="display: none">
+		<span class="close">×</span>
+		<p>总计：<span class="totalPrice"></span></p>
+	</div>
+	<script src="./jquery.min.js"></script>
+	<script>
+		var currentPrice = [];
+		var sum = 0;
+		var checkInputs = $("input[name='fruit']");
+		$(".buy").on('click', function () {
+			currentPrice.length = 0;
+			sum = 0;
+			for(var i = 0; i < checkInputs.length; i++){
+				if(checkInputs[i].checked == true){
+					currentPrice.push(checkInputs[i].getAttribute('price'));
+				}
+			}
+			console.log(1,currentPrice);
+			for(var i = 0; i < currentPrice.length; i++){
+				sum += parseInt(currentPrice[i]);
+			}
+			console.log(2,sum);
+			$('.totalPrice').html(sum);
+			$('.widget').show();
+		})
+		$('.close').on('click', function(){
+			$('.widget').hide();
+		})
+	</script>
+</body>
+</html>
